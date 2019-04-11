@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block level %}
+    <section class="content-header">
+      <h1></h1>
+      <ol class="breadcrumb">
+        <li><a href="/index/"><i class="fa fa-dashboard"></i>首页</a></li>
+        <li class="active"></li>
+      </ol>
+    </section>
+{% endblock %}
+{% block content %}
+    <iframe
+    src=""
+    frameborder="0"
+    width="1200"
+    height="550"
+    allowtransparenc></iframe>
+<script>
+function link(obj){
+    url = $(obj).attr('menu_url')
+    $("iframe").attr('src',url);
+    $("h1").html($(obj).text());
+    $("li.active").html($(obj).parent().parent().siblings().text());
+}
+</script>
+{% endblock %}
