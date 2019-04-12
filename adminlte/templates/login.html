@@ -76,5 +76,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script language="JavaScript">
+
+if (window != top)
+
+top.location.href = location.href;
+
+</script>
 </body>
 </html>

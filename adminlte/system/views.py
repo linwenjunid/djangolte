@@ -10,6 +10,31 @@ UserModel = get_user_model()
 
 
 @login_required
+def func(request):
+    if request.method == 'GET':
+        return render(request, 'func.html')
+    elif request.method == 'POST':
+        user = request.user
+        msg = None
+        oldPassword = request.POST.get('oldPassword')
+        newPassword = request.POST.get("newPassword")
+        conPassword = request.POST.get('conPassword')
+        if user.check_password(oldPassword):  # 到数据库中验证旧密码通过
+            if newPassword is None or conPassword is None:  # 新密码或确认密码为空
+                msg = "新密码不能为空"
+            elif newPassword != conPassword:  # 新密码与确认密码不一样
+                msg = "两次密码不一致"
+
+            else:
+                user.set_password(newPassword)  # 修改密码
+                user.save()
+                msg = '密码修改成功'
+        else:
+            msg = "旧密码输入错误"
+        return render(request, 'func.html', {'msg': msg})
+
+
+@login_required
 def index(request):
     return render(request, 'cont.html')
 
