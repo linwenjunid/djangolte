@@ -45,7 +45,6 @@ def login_view(request):
 
 def acc_login(request):
     data=request.POST
-    print(data)
     username = request.POST.get('username')
     password = request.POST.get("password")
     user = authenticate(username=username, password=password)  # 验证用户名和密码，返回用户对象
