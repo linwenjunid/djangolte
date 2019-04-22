@@ -10,6 +10,11 @@ UserModel = get_user_model()
 
 
 @login_required
+def tu_ling(request):
+    return render(request, 'tuling.html')
+
+
+@login_required
 def func(request):
     if request.method == 'GET':
         return render(request, 'func.html')
