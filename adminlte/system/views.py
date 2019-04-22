@@ -11,7 +11,15 @@ UserModel = get_user_model()
 
 @login_required
 def tu_ling(request):
-    return render(request, 'tuling.html')
+    from py2neo import Graph, Node, Relationship
+    from django.utils.safestring import mark_safe
+    graph = Graph('http://192.168.134.4:7474', username='neo4j', password='hadoop')
+    data = graph.run("match(n)-[r]->(m:Movie{title:'人在囧途'}) return n.name,type(r),m.title;").to_table()
+    list = []
+    for d in data:
+        dict = {'source': d[0], 'target': d[2], 'rela': d[1],'type':'resolved'}
+        list.append(dict)
+    return render(request, 'tuling.html', {'links': mark_safe(list)})# mark_safe 保证引号不会被转义
 
 
 @login_required
